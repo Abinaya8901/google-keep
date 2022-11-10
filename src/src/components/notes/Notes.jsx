@@ -5,7 +5,7 @@ import { styled } from '@mui/material/styles';
 import { DragDropContext, Draggable, Droppable  } from 'react-beautiful-dnd';
 
 import { DataContext } from '../../context/DataProvider';
-import { reorder } from '../../utils/common-utils';
+
 
 //components
 import Form from './Form';
@@ -19,6 +19,15 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 const Notes = () => {
 
     const { notes, setNotes } = useContext(DataContext);
+    
+
+    const reorder = (list, startIndex, endIndex) => {
+    const result = Array.from(list);
+    const [removed] = result.splice(startIndex, 1);
+    result.splice(endIndex, 0, removed);
+  
+    return result;
+};
 
     const onDragEnd = (result) => {
         if (!result.destination) 
